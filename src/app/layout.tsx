@@ -4,6 +4,7 @@ import { Metadata } from 'next';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import React from "react";
+import Providers from "@/app/providers";
 
 export const metadata: Metadata = {
     title: {
@@ -21,12 +22,17 @@ export default function RootLayout({
 }) {
     return (
         <html lang="en">
-        <body className="flex flex-col min-h-screen">
-        <Header />
-        <main className="flex-grow">
-            {children}
-        </main>
-        <Footer />
+        <head>
+            <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+        </head>
+        <body className="flex flex-col min-h-screen w-full overflow-x-hidden">
+        <Providers>
+            <Header />
+            <main className="flex-grow w-full">
+                {children}
+            </main>
+            <Footer />
+        </Providers>
         </body>
         </html>
     );

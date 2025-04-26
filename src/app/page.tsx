@@ -1,7 +1,8 @@
 // src/app/page.tsx
-import Link from 'next/link';
 import { getProductRepository } from '@/lib/di/container';
 import ProductCard from '@/app/products/components/ProductCard';
+import Link from "next/link";
+import React from "react";
 
 export default async function HomePage() {
     const productRepository = getProductRepository();
@@ -21,6 +22,7 @@ export default async function HomePage() {
                             </p>
                             <div className="flex flex-col sm:flex-row gap-4">
                                 <Link
+                                    replace={true}
                                     href="/products"
                                     className="inline-flex justify-center items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-blue-700 bg-white hover:bg-blue-50"
                                 >

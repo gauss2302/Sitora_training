@@ -1,18 +1,18 @@
 // src/lib/api/repositories/product-repository.ts
 import { Product, ProductListResponse } from '@/types/domain/product';
-import { ApiResponse, QueryParams } from '@/types/common';
+import { ApiResponse } from '@/types/common';
 import { HttpClient } from '@/lib/api/fetcher';
 import { buildQueryString } from '@/lib/utils/url';
 
 export interface IProductRepository {
-	getProducts(params?: QueryParams): Promise<ApiResponse<ProductListResponse>>;
+	getProducts(params?: { limit: number }): Promise<ApiResponse<ProductListResponse>>;
 	getProductById(id: string): Promise<ApiResponse<Product>>;
 }
 
 export class ProductRepository implements IProductRepository {
 	constructor(private readonly httpClient: HttpClient) {}
 
-	async getProducts(params?: QueryParams): Promise<ApiResponse<ProductListResponse>> {
+	async getProducts(params?: { limit: number }): Promise<ApiResponse<ProductListResponse>> {
 		const queryString = params ? buildQueryString(params) : '';
 		return await this.httpClient.fetch<ProductListResponse>(`/products${queryString}`, {
 			next: {

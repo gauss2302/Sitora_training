@@ -2,12 +2,18 @@
 'use client';
 
 import Link from 'next/link';
-import { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
+import AuthButton from '@/components/AuthButton';
 
 export default function Header() {
 	const [isMenuOpen, setIsMenuOpen] = useState(false);
 	const pathname = usePathname();
+
+	// Close mobile menu on navigation
+	useEffect(() => {
+		setIsMenuOpen(false);
+	}, [pathname]);
 
 	const navigation = [
 		{ name: 'Home', href: '/' },
@@ -49,7 +55,7 @@ export default function Header() {
 						</nav>
 					</div>
 
-					{/* Right section - Search and Cart */}
+					{/* Right section - Search, Cart, and Auth */}
 					<div className="flex items-center">
 						<div className="flex-shrink-0">
 							<button
@@ -98,6 +104,11 @@ export default function Header() {
 							</Link>
 						</div>
 
+						{/* Auth Button */}
+						<div className="ml-4 hidden sm:block">
+							<AuthButton />
+						</div>
+
 						{/* Mobile menu button */}
 						<div className="flex items-center sm:hidden ml-4">
 							<button
@@ -141,9 +152,9 @@ export default function Header() {
 				</div>
 			</div>
 
-			{/* Mobile menu */}
-			<div className={`sm:hidden ${isMenuOpen ? 'block' : 'hidden'}`}>
-				<div className="pt-2 pb-3 space-y-1">
+			{/* Mobile menu - with proper containment */}
+			<div className={`sm:hidden overflow-hidden ${isMenuOpen ? 'block' : 'hidden'}`}>
+				<div className="pt-2 pb-3 space-y-1 px-4 max-w-6xl mx-auto">
 					{navigation.map((item) => (
 						<Link
 							key={item.name}
@@ -158,6 +169,15 @@ export default function Header() {
 							{item.name}
 						</Link>
 					))}
+
+					{/* Login/Account link in mobile menu */}
+					<Link
+						href="/login"
+						className="block pl-3 pr-4 py-2 border-l-4 border-transparent text-base font-medium text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700"
+						onClick={() => setIsMenuOpen(false)}
+					>
+						Account
+					</Link>
 				</div>
 			</div>
 		</header>

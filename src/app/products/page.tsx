@@ -1,5 +1,5 @@
 // src/app/products/page.tsx
-import { Suspense } from 'react';
+import React, { Suspense } from 'react';
 import { getProductRepository } from '@/lib/di/container';
 import ProductList from './components/ProductList';
 import ProductListSkeleton from './components/ProductListSkeleton';
@@ -28,7 +28,7 @@ export default async function ProductsPage({ searchParams }: ProductsPageProps) 
 	const response = await productRepository.getProducts({
 		page,
 		limit,
-		...(category && { category })
+		...(category && {category})
 	});
 
 	// Handle API errors

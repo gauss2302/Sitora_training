@@ -1,4 +1,4 @@
-// src/types/auth.ts
+// src/types/auth.ts - Updated for FakeStore API
 export interface User {
 	id: number;
 	username: string;
@@ -13,7 +13,7 @@ export interface User {
 export interface LoginCredentials {
 	username: string;
 	password: string;
-	expiresInMins?: number;
+	expiresInMins?: number; // Not used by FakeStore API but kept for compatibility
 }
 
 export interface LoginResponse {
@@ -32,4 +32,9 @@ export interface AuthState {
 	isAuthenticated: boolean;
 	isLoading: boolean;
 	error: string | null;
+}
+
+// FakeStore API token response
+export interface TokenResponse {
+	token: string;
 }

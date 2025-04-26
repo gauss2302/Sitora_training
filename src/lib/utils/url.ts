@@ -1,7 +1,7 @@
 // src/lib/utils/url.ts
 import { QueryParams } from '@/types/common';
 
-export function buildQueryString(params: QueryParams): string {
+export function buildQueryString(params: { limit: number }): string {
 	const searchParams = new URLSearchParams();
 
 	Object.entries(params).forEach(([key, value]) => {

@@ -1,5 +1,6 @@
 // src/components/HeroSection.tsx
 import Link from 'next/link';
+import React from "react";
 
 export default function HeroSection() {
 	return (

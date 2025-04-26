@@ -5,7 +5,7 @@ import { ProductRepository } from '@/lib/api/repositories/product-repository';
 // Simple dependency injection container
 export class Container {
 	private static instance: Container;
-	private services: Map<string, any> = new Map();
+	private services: Map<string, unknown> = new Map();
 
 	private constructor() {
 		// Initialize base services
